@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false" />
+    
+    
+    
+    
+    <package name="shop" extends="struts-default" namespace="/">
+    
+    <global-results>
+		<result name="msg">/WEB-INF/jsp/msg.jsp</result>	
+		<result name="login">/WEB-INF/jsp/login.jsp</result>
+    </global-results>
+    
+    <!-- 访问主页面Action -->
+    	<action name="index" class="indexAction">
+    		<result  name="index">/WEB-INF/jsp/index.jsp</result>
+    	</action>
+    	
+   	<!-- 用户模块Action -->
+   		<action name="user_*" class="userAction" method="{1}">
+   			<result name="RegistPage">/WEB-INF/jsp/regist.jsp</result>	
+			<result name="loginpage">/WEB-INF/jsp/login.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="login_success" type="redirectAction">index</result>	
+			<result name="quit" type="redirectAction">index</result>
+			<result name="checkcodeFail">/WEB-INF/jsp/regist.jsp</result>	
+			<result name="checkLogin">/WEB-INF/jsp/login.jsp</result>
+   		</action>
+   		
+   		<!-- 验证码Action -->
+   		<action name="check" class="CheckImgAction">
+   				
+   		</action>
+   		
+   		<!-- 商品模块Action -->
+   		<action name="product_*" class="productAction" method="{1}">
+   				<result name="findBypid">/WEB-INF/jsp/product.jsp</result>
+				<result name="findBycid">/WEB-INF/jsp/productList.jsp</result>
+				<result name="findByCsid">/WEB-INF/jsp/productList.jsp</result>
+   		</action>
+   		
+   		<!-- 购物车模块Action -->
+   		<action name="car_*" class="carAction" method="{1}">
+   			<result name="addCar">/WEB-INF/jsp/car.jsp</result>
+   			<result name="cleanCar">/WEB-INF/jsp/car.jsp</result>
+   			<result name="removeCart">/WEB-INF/jsp/car.jsp</result>
+   			<result name="goCar">/WEB-INF/jsp/car.jsp</result>
+   		</action>
+    	
+    	<!-- 订单模块Action -->
+    	<action name="order_*" class="orderAction" method="{1}">
+    		<result name="save">/WEB-INF/jsp/order.jsp</result>
+    		<result name="findByUid">/WEB-INF/jsp/orderList.jsp</result>
+   			<result name="findByOid">/WEB-INF/jsp/order.jsp</result>
+    	</action>
+    	
+    	<!-- 管理员Action -->
+    	<action name="adminUser_*" class="adminUserAction" method="{1}">
+    		<result name="adminerror">/admin/login.jsp</result>
+    		<result name="adminsuccess">/admin/index.jsp</result>
+    	</action>
+    	
+    	<!-- 一级分类Action -->
+    	<action name="adminCategory_*" class="adminCategoryAction" method="{1}">
+    		<result name="findAll">/Node/index.jsp</result>
+    		<result name="save" type="redirectAction">adminCategory_findAll.action</result>
+    		<result name="edit">/Node/edit.jsp</result>
+    		<result name="delete" type="redirectAction">adminCategory_findAll.action</result>
+			<result name="update" type="redirectAction">adminCategory_findAll.action</result>
+    	</action>
+    	
+    	
+    	<!-- 二级分类action -->
+    	<action name="adminCategorySecond_*" class="adminCategorySecondAction" method="{1}">
+    			<result name="findAll">/Role/index.jsp</result>
+    			<result name="addPage">/Role/add.jsp</result>
+   				<result name="save" type="redirectAction">adminCategorySecond_findAll.action?page=1</result>
+   				<result name="delete" type="redirectAction">adminCategorySecond_findAll.action?page=1</result>
+				<result name="edit">/Role/edit.jsp</result>
+				<result name="update" type="redirectAction">adminCategorySecond_findAll.action?page=1</result>
+    	</action>
+    	
+    	<!-- 商品管理Action -->
+    	<action name="adminProduct_*" class="adminProductAction" method="{1}">
+    		<result name="findAll">/Product/index.jsp</result>
+    		<result name="addPage">/Product/add.jsp</result>
+    		<result name="savesuccess" type="redirectAction">adminProduct_findAll.action?page=1</result>
+    		<result name="delete" type="redirectAction">adminProduct_findAll.action?page=1</result>
+    		<result name="edit">/Product/edit.jsp</result>
+    		<result name="update">adminProduct_findAll.action?page=1</result>
+    	</action>
+    	
+    	<!-- 后台订单管理Action -->
+    	<action name="adminOrder_*" class="adminOrderAction" method="{1}">
+    		<result name="findAll">/Order/index.jsp</result>
+    		<result name="findOrderItem">Order/Item.jsp</result>
+    	</action>
+    	
+    </package>
+
+	
+</struts>
